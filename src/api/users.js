@@ -36,3 +36,17 @@ export const userRegister=(data)=>{
         data
     })
 }
+
+//关注用户
+export const followUsers=id=>{
+    return axios({
+        url:`/user_follows/${id}`
+    })
+}
+
+//取消关注
+export const unFollowUsers=id=>{
+    return axios({
+        url:`/user_unfollow/${id}`
+    })
+}

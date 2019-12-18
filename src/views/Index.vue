@@ -79,6 +79,7 @@ export default {
       if (res.data.data.length < this.cateList[this.active].pageSize) {
         this.cateList[this.active].finished = true
       }
+      // console.log(res)
     },
     onLoad() {
       this.cateList[this.active].pageIndex++

@@ -8,3 +8,18 @@ export const getArticleList=(params)=>{
         params
     })
 }
+
+
+//获取新闻详情页
+export const getArticleDetail=(id)=>{
+    return axios({
+        url:`/post/${id}`
+    })
+}
+
+//文章点赞
+export const postLike=id=>{
+    return axios({
+       url: `/post_like/${id}`
+    })
+}
