@@ -31,7 +31,7 @@ axios.interceptors.response.use(function (response) {
     if (response.data.message === '用户信息验证失败!' || response.data.message === '用户信息验证失败') {
         Toast.fail('用户信息验证失败')
         //重定向
-        window.Location.herf = '#/login'
+        window.location.href='#/login'
     }
     return response;
 }, function (error) {

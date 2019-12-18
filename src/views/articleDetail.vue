@@ -19,8 +19,8 @@
       <div class="content" v-if="artDetail.type===1" v-html="artDetail.content"></div>
       <video class="myvideo" v-if="artDetail.type===2" :src="artDetail.content" controls></video>
       <div class="opt">
-        <span class="like" :class="{active:artDetail.has_like}">
-          <van-icon name="good-job-o" @click="artLike"  />
+        <span class="like" @click="artLike" :class="{active:artDetail.has_like}">
+          <van-icon name="good-job-o" />
           {{artDetail.like_length}}
         </span>
         <span class="chat">
@@ -44,6 +44,7 @@
       </div>
       <div class="more">更多跟帖</div>
     </div>
+    <hmCommentArea :artDetail="artDetail"></hmCommentArea>
   </div>
 </template>
 
@@ -51,11 +52,15 @@
 import { getArticleDetail } from '@/api/article.js'
 import { followUsers, unFollowUsers } from '@/api/users.js'
 import { postLike } from '@/api/article.js'
+import  hmCommentArea  from '@/components/hm_commentArea.vue'
 export default {
   data() {
     return {
       artDetail: {}
     }
+  },
+  components: {
+    hmCommentArea
   },
   async mounted() {
     // 根据id获取文章的详情，实现文章详情的动态渲染
@@ -72,11 +77,13 @@ export default {
       let res
       if (this.artDetail.has_follow === true) {
         res = await unFollowUsers(this.artDetail.user.id)
+        this.artDetail.has_follow =false
       } else if (this.artDetail.has_follow === false) {
         res = await followUsers(this.artDetail.user.id)
+        this.artDetail.has_follow = true
       }
       this.$toast.success(res.data.message)
-      this.artDetail.has_follow = !this.artDetail.has_follow
+
     },
     //点赞
     async artLike() {
@@ -94,6 +101,9 @@ export default {
 </script>
 
 <style lang='less' scoped>
+.articaldetail{
+    padding-bottom: 50px;
+}
 .header {
   padding: 0px 10px;
   height: 50px;
@@ -161,7 +171,7 @@ export default {
     border-radius: 15px;
   }
   .like {
-    &.active{
+    &.active {
       color: red;
       border-color: red;
     }

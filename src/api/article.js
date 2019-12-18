@@ -23,3 +23,10 @@ export const postLike=id=>{
        url: `/post_like/${id}`
     })
 }
+
+//文章收藏
+export const starArtcle=id=>{
+    return axios({
+        url:`/post_star/${id}`
+    })
+}

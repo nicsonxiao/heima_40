@@ -6,7 +6,7 @@
         <van-icon name="search" />&nbsp;&nbsp;&nbsp;
         <span>搜索商品</span>
       </div>
-      <van-icon name="manager-o" class="icon" @click="jump"/>
+      <van-icon name="manager-o" class="icon" @click="jump" />
     </div>
     <van-tabs v-model="active" sticky swipeable>
       <van-tab :title="item.name" v-for="item in cateList" :key="item.id">
@@ -60,7 +60,7 @@ export default {
           pageSize: 6,
           loading: false,
           finished: false,
-          isLoading:false
+          isLoading: false
         }
       })
       this.getPostList()
@@ -74,7 +74,7 @@ export default {
         category: this.cateList[this.active].id //栏目id
       })
       this.cateList[this.active].postList.push(...res.data.data)
-      this.cateList[this.active].isLoading=false
+      this.cateList[this.active].isLoading = false
       this.cateList[this.active].loading = false
       if (res.data.data.length < this.cateList[this.active].pageSize) {
         this.cateList[this.active].finished = true
@@ -85,20 +85,16 @@ export default {
       this.cateList[this.active].pageIndex++
       this.getPostList()
     },
-    onRefresh(){
-      this.cateList[this.active].pageIndex=1
-      this.cateList[this.active].finished=false
-      this.cateList[this.active].postList.length=0
+    onRefresh() {
+      this.cateList[this.active].pageIndex = 1
+      this.cateList[this.active].finished = false
+      this.cateList[this.active].postList.length = 0
       this.getPostList()
     },
     //实现个人中心跳转
-    jump(){
-      let id= window.localStorage.getItem('hm_40_id')
-      if(id){
-        this.$router.push({path:`/personal/${id}`})
-      }else{
-        this.$router.push({name:'login'})
-      }  
+    jump() {
+      let id = window.localStorage.getItem('hm_40_id')
+      this.$router.push({ path: `/personal/${id}` })
     }
   }
 }
