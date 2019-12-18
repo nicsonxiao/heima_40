@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="container">
-      <div class="close">
+      <div class="close" @click="$router.push({name:'index'})">
         <span class="iconfont iconicon-test"></span>
       </div>
       <div class="logo">
@@ -56,6 +56,8 @@ export default {
         if(res.data.message==="登录成功"){
                 //将当前的用户的token存储到本地
           localStorage.setItem('hm_40_token',res.data.data.token)
+          //登录成功时。存id
+          localStorage.setItem('hm_40_id',res.data.data.user.id)
                 //页面跳转
           this.$router.push({path:`/personal/${res.data.data.user.id}`})
         }else{

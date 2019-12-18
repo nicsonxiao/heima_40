@@ -10,3 +10,29 @@ export const userLogin=(data)=>{
         data
     })
 }
+
+//获取用户信息
+export const getUserInfo=id=>{
+    return axios({
+        url:`/user/${id}`
+    })
+}
+
+//编辑用户信息
+export const editUserInfo=(id,data)=>{
+    return axios({
+        url:`/user_update/${id}`,
+        method:'post',
+        data
+    })
+}
+
+
+//注册
+export const userRegister=(data)=>{
+    return axios({
+        url:'/register',
+        method:'post',
+        data
+    })
+}

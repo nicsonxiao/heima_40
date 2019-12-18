@@ -4,13 +4,25 @@ import VueRouter from 'vue-router'
 
 import Login from '@/views/Login.vue'
 import Personal from '@/views/Personal.vue'
-
+import EditPersonal from '@/views/EditPersonal.vue'
+import Register from '@/views/Register.vue'
+import Index from '@/views/Index.vue'
 //挂载路由
 Vue.use(VueRouter)
 
 //创建路由对象，进行路由配置
 var router =new VueRouter({
     routes:[
+        {
+            name:'default',
+            path:'/',
+            redirect:{name:'index'}
+        },
+        {
+            name:'index',
+            path:'/index',
+            component:Index
+        },
         {
             name:'login',
             path:'/login',
@@ -20,6 +32,16 @@ var router =new VueRouter({
             name:'pesonal',
             path:'/personal/:id',
             component:Personal
+        },
+        {
+            name:'editpersonal',
+            path:'/editpersonal/:id',
+            component:EditPersonal
+        },
+        {
+            name:'register',
+            path:'/register',
+            component:Register
         }
     ]
 })
