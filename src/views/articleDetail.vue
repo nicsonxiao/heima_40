@@ -31,16 +31,16 @@
     <!-- 精彩跟帖 -->
     <div class="keeps">
       <h2>精彩跟帖</h2>
-      <div class="item">
+      <div class="item" v-for="item in commentList" :key=item.id>
         <div class="head">
-          <img src="../assets/logo.png" alt />
+          <img :src="item.user.head_img" alt />
           <div>
-            <p>火星网友</p>
+            <p>{{item.user.nickname}}</p>
             <span>2小时前</span>
           </div>
           <span>回复</span>
         </div>
-        <div class="text">文章说得很有道理</div>
+        <div class="text">{{item.content}}</div>
       </div>
       <div class="more">更多跟帖</div>
     </div>
@@ -51,12 +51,13 @@
 <script>
 import { getArticleDetail } from '@/api/article.js'
 import { followUsers, unFollowUsers } from '@/api/users.js'
-import { postLike } from '@/api/article.js'
+import { postLike,getCommentsById } from '@/api/article.js'
 import  hmCommentArea  from '@/components/hm_commentArea.vue'
 export default {
   data() {
     return {
-      artDetail: {}
+      artDetail: {},
+      commentList:{}
     }
   },
   components: {
@@ -69,6 +70,14 @@ export default {
     let res = await getArticleDetail(id)
     if (res.status === 200) {
       this.artDetail = res.data.data
+    }
+    console.log(res)
+    let res2 = await getCommentsById(id)
+    if(res2.status===200){
+      this.commentList=res2.data.data.map(value=>{
+        value.user.head_img=localStorage.getItem('hm_40_baseURL')+value.user.head_img
+        return value
+      })
     }
   },
   methods: {

@@ -8,6 +8,9 @@ import EditPersonal from '@/views/EditPersonal.vue'
 import Register from '@/views/Register.vue'
 import Index from '@/views/Index.vue'
 import ArticleDetail from '@/views/articleDetail.vue'
+import MyFollow from '@/views/MyFollow.vue'
+import MyStar from '@/views/MyStar.vue'
+import comments from '@/views/comments.vue'
 //挂载路由
 Vue.use(VueRouter)
 
@@ -48,6 +51,21 @@ var router =new VueRouter({
             name:'articleDetail',
             path:'/articleDetail/:id',
             component:ArticleDetail
+        },
+        {
+            name:'myfollow',
+            path:'/myfollow',
+            component:MyFollow
+        },
+        {
+            name:'mystar',
+            path:'/mystar',
+            component:MyStar
+        },
+        {
+            name:'comments',
+            path:'/comments/:id',
+            component:comments
         }
     ]
 })
